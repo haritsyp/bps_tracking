@@ -186,7 +186,10 @@ class _LoginState extends State<LoginPage> {
       // backgroundColor: Colors.blueGrey,
       resizeToAvoidBottomPadding: false,
       resizeToAvoidBottomInset: true,
-      body: Container(
+      body: SingleChildScrollView(
+        child: Container(
+          width: mediaQuery.size.width,
+          height: mediaQuery.size.height,
         /* decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("images/bg-with-logo.jpg"),
@@ -245,17 +248,17 @@ class _LoginState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 15.0,
-                ),
                 Text('Lupa Password?', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
+                SizedBox(
+                  height: 25.0,
+                ),
                 Text('Versi 1.0', style: TextStyle(color: Colors.grey, ),)
               ],
             ),
           ),
         ),
       )
-
+      )
     );
   }
 
