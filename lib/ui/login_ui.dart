@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 // import 'package:bps_tracking/apiservice.dart';
 import 'package:flutter/services.dart';
-// import 'package:bps_tracking/model/user.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -189,7 +187,6 @@ class _LoginState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Container(
           width: mediaQuery.size.width,
-          height: mediaQuery.size.height,
         /* decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("images/bg-with-logo.jpg"),
@@ -213,18 +210,18 @@ class _LoginState extends State<LoginPage> {
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Center(
-                      child: Image.asset('resources/BPS.png', width: 65,),
+                      child: Image.asset('resources/logo_text.png', width: mediaQuery.size.width - 80,),
                     ),
-                    Column(
+                    /* Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       // crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text('Best Plating Solution', style: boldText,),
                         Text('Sistem karyawan terpusat', style: normalText,)
-                    ],)
+                    ],) */
                 ]),
                 Center(
-                  child: Image.asset('resources/login_img.png', height: 300,),
+                  child: Image.asset('resources/login_img.png', width: mediaQuery.size.height/3,),
                 ),
                 // SvgPicture.asset("resources/login_img.svg"),
                 SizedBox(

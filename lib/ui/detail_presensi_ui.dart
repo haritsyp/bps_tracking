@@ -1,4 +1,4 @@
-import 'package:bps_tracking/ui/maps_ui.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,11 +33,12 @@ class _HomeState extends State<HomePage> {
     TextStyle textButton = TextStyle(
       color: Colors.white
     );
-    TextStyle boldText = TextStyle(
-      fontWeight: FontWeight.bold
-    );
     
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Detail Presensi'),
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -48,13 +49,13 @@ class _HomeState extends State<HomePage> {
             // height: 300,
             width: mediaQuery.size.width,
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Image.asset('resources/logo_text.png', width: mediaQuery.size.width/2,),
+                      Image.asset('resources/BPS.png', width: 30,),
                       IconButton(
                         icon: Icon(Icons.exit_to_app),
                         tooltip: 'Logout',
@@ -82,7 +83,7 @@ class _HomeState extends State<HomePage> {
                             color: Colors.red[400],
                             child: MaterialButton(
                               onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapsPage()));
+                                Navigator.of(context).pushReplacementNamed('/location');
                               },
                               minWidth: 150,
                               child: Row(
@@ -104,9 +105,13 @@ class _HomeState extends State<HomePage> {
               )
             ),
           ),
-          Padding(
-              padding: EdgeInsets.only(left:20, top:10),
-              child: Text('Histori Kegiatan', style: boldText,),
+          Container(
+            width: mediaQuery.size.width,
+            color: Colors.red,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Text('Histori Kegiatan'),
+            )
           ),
           _buildListView(mediaQuery),
           SizedBox(height: 60,)
@@ -135,17 +140,15 @@ class _HomeState extends State<HomePage> {
   Widget _buildListView(MediaQueryData mediaQuery) {
     return Padding(
       // padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
+      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
       // color: Colors.blue,
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
         return Card(
-          borderOnForeground: true,
-          // shape: Rectangle(left, top, width, height),
           child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

@@ -1,6 +1,7 @@
-import 'package:bps_tracking/ui/home_ui.dart';
 import 'package:flutter/material.dart';
 import 'ui/login_ui.dart';
+import 'ui/home_ui.dart';
+import 'ui/maps_ui.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/': (BuildContext context) => LoginPage(),
         '/home': (BuildContext context) => HomePage(),
-        // '/location': (BuildContext context) => HomePage(),
+        '/location': (BuildContext context) => GoogleMapsPage(),
         // '/location': (BuildContext context) => HomePage(),
       },
     );

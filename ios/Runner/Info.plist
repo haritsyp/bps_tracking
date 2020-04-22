@@ -41,5 +41,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Needed to access location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Needed to access location</string>
+	<key>io.flutter.embedded_views_preview</key>
+	<string/>YES</string>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiZGFuaWVscmF5c2EiLCJhIjoiY2s5OXFmN3Y1MDR3ZzNnczJ5am9sd3BoOSJ9.5OIruCU94pqT7ro_ZcKTbg</string>
 </dict>
 </plist>
