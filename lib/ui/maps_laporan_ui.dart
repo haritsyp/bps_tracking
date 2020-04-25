@@ -1,40 +1,16 @@
 import 'dart:async';
 
-import 'package:bps_tracking/ui/detail_presensi_ui.dart';
+import 'package:bps_tracking/ui/detail_laporan_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-/* class GoogleMapsPage extends StatelessWidget {
-  var normalText = TextStyle(
-    color: Colors.black,
-    fontSize: 20,
-  ); 
-  
+class MapsLaporPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Kirim Lokasi',style: normalText,),
-        backgroundColor: Colors.white,
-        
-      ),
-      // debugShowCheckedModeBanner: false,
-      body: SafeArea(
-        child: MapSample(),
-      ),
-      
-    );
-  }
-} */
-
-class GoogleMapsPage extends StatefulWidget {
-  @override
-  State<GoogleMapsPage> createState() => MapSampleState();
+  State<MapsLaporPage> createState() => MapLaporState();
 }
 
-class MapSampleState extends State<GoogleMapsPage> {
+class MapLaporState extends State<MapsLaporPage> {
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition _newPosition;
   Marker _marker;
@@ -164,8 +140,8 @@ class MapSampleState extends State<GoogleMapsPage> {
               child: FloatingActionButton.extended(
                 onPressed: () {
                   // Add your onPressed code here!
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => PresensiPage()));
-                  Navigator.of(context).pushNamed('/presensi');
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => LaporKegiatanPage()));
+                  Navigator.of(context).pushNamed('/lapor');
                 },
                 heroTag: 0,
                 label: Text('TETAPKAN LOKASI'),

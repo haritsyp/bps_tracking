@@ -1,3 +1,6 @@
+import 'package:bps_tracking/ui/detail_laporan_ui.dart';
+import 'package:bps_tracking/ui/detail_presensi_ui.dart';
+import 'package:bps_tracking/ui/maps_laporan_ui.dart';
 import 'package:flutter/material.dart';
 import 'ui/login_ui.dart';
 import 'ui/home_ui.dart';
@@ -24,7 +27,9 @@ class MyApp extends StatelessWidget {
         '/': (BuildContext context) => LoginPage(),
         '/home': (BuildContext context) => HomePage(),
         '/location': (BuildContext context) => GoogleMapsPage(),
-        // '/location': (BuildContext context) => HomePage(),
+        '/location_2': (BuildContext context) => MapsLaporPage(),
+        '/presensi': (BuildContext context) => PresensiPage(),
+        '/lapor': (BuildContext context) => LaporKegiatanPage(),
       },
     );
   }

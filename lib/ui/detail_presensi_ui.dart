@@ -37,6 +37,8 @@ class _PresensiState extends State<PresensiPage> {
       color: Colors.white
     );
     TextStyle boldText = TextStyle(
+      fontFamily: 'Asap',
+      fontSize: 20,
       fontWeight: FontWeight.bold
     );
     TextStyle clockText = TextStyle(
@@ -47,12 +49,17 @@ class _PresensiState extends State<PresensiPage> {
     );
     var normalText = TextStyle(
       fontFamily: 'Asap',
-      color: Colors.black,
-      fontSize: 20,
-    ); 
+      color: Colors.grey,
+      fontSize: 16,
+    );
+    var photoText = TextStyle(
+      fontFamily: 'Asap',
+      color: Colors.red[300],
+      fontSize: 14,
+    );
     DateTime now = DateTime.now();
     // String formattedDate = DateFormat('kk:mm:ss \n EEE d MMM').format(now);
-    String formattedDate = DateFormat('hh:mm').format(now);
+    String formattedDate = DateFormat('kk:mm').format(now);
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail Presensi', style: fontJudul,),
@@ -66,6 +73,7 @@ class _PresensiState extends State<PresensiPage> {
             // height: mediaQuery.size.height - 32,
             // height: screenHeightExcludingToolbar(context),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -73,11 +81,22 @@ class _PresensiState extends State<PresensiPage> {
                   heightFactor: 4,
                   child: Text(formattedDate, style: clockText,),
                 ),
-                Text('Lokasi Anda', style: boldText,),
-                Text('Jl. Granit Nila C-26, Driyorejo, Kabupaten Gresik, Jawa Timur'),
-                Text('Rencana Kegiatan', style: boldText,),
+                Row(children: <Widget>[
+                  Icon(Icons.location_on),
+                  SizedBox(width: 10,),
+                  Text('Lokasi Anda', style: boldText,),
+                ],),
+                SizedBox(height: 10,),
+                Text('Jl. Granit Nila C-26, Driyorejo, Kabupaten Gresik, Jawa Timur', style: normalText),
+                SizedBox(height: 10,),
+                Row(children: <Widget>[
+                  Icon(Icons.business),
+                  SizedBox(width: 10,),
+                  Text('Rencana Kegiatan', style: boldText,),
+                ],),
+                SizedBox(height: 10,),
                 TextField(
-                  maxLines: 4,
+                  maxLines: 3,
                   //decoration: InputDecoration.collapsed(hintText: "Enter your text here"),
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -87,32 +106,49 @@ class _PresensiState extends State<PresensiPage> {
                         padding: EdgeInsets.only(right: 30, left: 20),
                         child: Icon(Icons.account_circle, color: Colors.grey),
                       ), */
-                      hintText: "Enter your text here",
+                      hintText: "Tulis target kegiatan yang ingin anda capai hari ini",
                       //labelStyle: labelText,
                       border: OutlineInputBorder(borderSide: BorderSide(color: Colors.red))
                       //OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
                   ),
                 ),
-                Text('Rencana Kegiatan', style: boldText,),
+                SizedBox(height: 10,),
+                Row(children: <Widget>[
+                  Icon(Icons.camera_alt),
+                  SizedBox(width: 10,),
+                  Text('Foto', style: boldText,),
+                ],),
+                SizedBox(height: 10,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
                       width: (mediaQuery.size.width/2),
-                      child: Text('Masukkan foto diri anda agar kami tahu anda telah siap kerja bersama kami',
-                    softWrap: true,maxLines: 4,)
+                      child: Text('Masukkan foto diri anda agar kami tahu anda telah siap kerja bersama kami', style: normalText,
+                    softWrap: true,)
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        color: Colors.red[300]
-                      ),
-                      width: (mediaQuery.size.width/3),
-                      child: Center(child: Text('+ Tekan Di Sini Untuk Membuka Kamera',
-                      textAlign: TextAlign.center,)),
-                    )
+                    Column(
+                      children:<Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.red[300]),
+                          ),
+                          width: 150,
+                          height: 150,
+                          child: Center(child: Text('+ Tekan Di Sini Untuk Membuka Kamera', style: photoText,
+                          textAlign: TextAlign.center,)),
+                        ),
+                        FlatButton(
+                          onPressed: (){
+                            //
+                          },
+                          child: Text('Edit', style: photoText,),
+                        ),
+                      ])
                   ],
                 ),
+                SizedBox(height: 10,),
                 MaterialButton(
                   onPressed: (){
                     //
@@ -121,9 +157,14 @@ class _PresensiState extends State<PresensiPage> {
                       subtitle: "Data Terkirim",
                       style: SweetAlertStyle.success,
                       onPress: (bool isConfirm){
-                        Navigator.pop(context);
+                        return true;
+                        // Navigator.pop(context);
+                        // Navigator.of(context).pushNamed('/home');
+                        // Navigator.popAndPushNamed(context, '/home');
+                        // Navigator.pushReplacement(context, '/home');
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                       });
+                      // Navigator.popUntil(context, ModalRoute.withName('/home'));
                   },
                   minWidth: mediaQuery.size.width - 30,
                   color: Colors.red[300],
@@ -148,22 +189,22 @@ class _PresensiState extends State<PresensiPage> {
       
     );
   }
-
+  
   Size screenSize(BuildContext context) {
-  return MediaQuery.of(context).size;
-}
-double screenHeight(BuildContext context,
-    {double dividedBy = 1, double reducedBy = 0.0}) {
-  return (screenSize(context).height - reducedBy) / dividedBy;
-}
-double screenWidth(BuildContext context,
-    {double dividedBy = 1, double reducedBy = 0.0}) {
-  return (screenSize(context).width - reducedBy) / dividedBy;
-}
-double screenHeightExcludingToolbar(BuildContext context,
-    {double dividedBy = 1}) {
-  return screenHeight(context, dividedBy: dividedBy, reducedBy: kToolbarHeight);
-}
+    return MediaQuery.of(context).size;
+  }
+  double screenHeight(BuildContext context,
+      {double dividedBy = 1, double reducedBy = 0.0}) {
+    return (screenSize(context).height - reducedBy) / dividedBy;
+  }
+  double screenWidth(BuildContext context,
+      {double dividedBy = 1, double reducedBy = 0.0}) {
+    return (screenSize(context).width - reducedBy) / dividedBy;
+  }
+  double screenHeightExcludingToolbar(BuildContext context,
+      {double dividedBy = 1}) {
+    return screenHeight(context, dividedBy: dividedBy, reducedBy: kToolbarHeight);
+  }
 
 }
 

@@ -1,8 +1,8 @@
 import 'package:bps_tracking/ui/maps_ui.dart';
+import 'package:bps_tracking/ui/maps_laporan_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 SharedPreferences preferences;
 
 class HomePage extends StatefulWidget {
@@ -36,6 +36,8 @@ class _HomeState extends State<HomePage> {
       color: Colors.white
     );
     TextStyle boldText = TextStyle(
+      fontFamily: 'Asap',
+      fontSize: 18,
       fontWeight: FontWeight.bold
     );
     
@@ -43,12 +45,21 @@ class _HomeState extends State<HomePage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+          // mainAxisSize: MainAxisSize.max,
           // padding: EdgeInsets.only(bottom: 16.0),
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
           Container(
-            color: Colors.amber,
-            // height: 300,
-            width: mediaQuery.size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('resources/bg_pie.png'),
+                // fit: BoxFit.fill,
+                alignment: Alignment.topRight
+              ),
+              // shape: BoxShape.circle,
+            ),
+            // height: 210,
+            // width: mediaQuery.size.width,
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -57,13 +68,19 @@ class _HomeState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Image.asset('resources/logo_text.png', width: mediaQuery.size.width/2,),
+                      /* FlatButton(
+                        color: Colors.red,
+                        onPressed: (){
+                          Navigator.popUntil(context, ModalRoute.withName('/'));
+                        },
+                        child: Icon(Icons.exit_to_app),
+                      ), */
                       IconButton(
                         icon: Icon(Icons.exit_to_app),
                         tooltip: 'Logout',
                         onPressed: () {
-                          setState(() {
-                            // _volume += 10;
-                          });
+                          // _logout();
+                          Navigator.popUntil(context, ModalRoute.withName('/'));
                         },
                       ),
                     ],
@@ -79,20 +96,21 @@ class _HomeState extends State<HomePage> {
                           Text('Rinaldy Siwy', style: fontIsi,),
                           SizedBox(height: 10,),
                           MaterialButton(
-                              onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapsPage()));
-                              },
-                              color: Colors.red[300],
-                              minWidth: 150,
-                              elevation: 1,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Icon(Icons.fingerprint, color: Colors.white,),
-                                  SizedBox(width: 10,),
-                                  Text('ISI PRESENSI', style: textButton)
-                              ],)
-                            ),
+                            onPressed: (){
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapsPage()));
+                              Navigator.of(context).pushNamed('/location');
+                            },
+                            color: Colors.red[300],
+                            minWidth: 150,
+                            elevation: 1,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Icon(Icons.fingerprint, color: Colors.white,),
+                                SizedBox(width: 10,),
+                                Text('ISI PRESENSI', style: textButton)
+                            ],)
+                          ),
                       ]),
                       Image.asset('resources/siwy.png', width: 125,),
                       SizedBox(width: 40,)
@@ -103,8 +121,9 @@ class _HomeState extends State<HomePage> {
             ),
           ),
           Padding(
-              padding: EdgeInsets.only(left:10, top:10),
-              child: Text('Histori Kegiatan', style: boldText,),
+            // padding: EdgeInsets.only(left:10, top:10),
+            padding: EdgeInsets.all(16),
+            child: Text('Histori Kegiatan', style: boldText,),
           ),
           _buildListView(mediaQuery),
           SizedBox(height: 60,)
@@ -118,7 +137,8 @@ class _HomeState extends State<HomePage> {
         width: mediaQuery.size.width - 50,
         child: FloatingActionButton.extended(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapsPage()));
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => MapsLaporPage()));
+            Navigator.of(context).pushNamed('/location_2');
           },
           label: Text('LAPOR KEGIATAN'),
           // icon: Icon(Icons.fingerprint),
@@ -135,29 +155,34 @@ class _HomeState extends State<HomePage> {
       // padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
       // color: Colors.blue,
-      child: ListView.builder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.black,
+        ),
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-        return Card(
-          borderOnForeground: true,
-          // shape: Rectangle(left, top, width, height),
-          child: Padding(
-          padding: const EdgeInsets.all(12.0),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical:8.0,horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Kegiatan'+index.toString()),
+              Text('Kegiatan'+index.toString(), style: TextStyle(fontSize:18),),
+              SizedBox(height: 5,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('Kegiatan'+index.toString()),
-                  Text('Kegiatan'+index.toString()),
-                  Text('Kegiatan'+index.toString()),
+                  Icon(Icons.local_post_office, size: 16,),
+                  Text('16/04/2020'),
+                  Spacer(flex: 1,),
+                  Icon(Icons.timer, size: 16),
+                  Text('09.00'),
+                  Spacer(flex: 2,),
+                  Icon(Icons.face, size: 16),
+                  Text('Customer: Siwy'),
               ],)
             ],
           ),
-          )
         );
       },
       itemCount:12,
