@@ -80,7 +80,7 @@ class _LoginState extends State<LoginPage> {
     ]);
     var labelText = TextStyle(
       color: Colors.grey,
-      fontSize: mediaQuery.size.width > 400 ? 16.0 : 12.0,
+      // fontSize: mediaQuery.size.width > 400 ? 16.0 : 12.0,
     );
     var boldText = TextStyle(
       color: Colors.black,

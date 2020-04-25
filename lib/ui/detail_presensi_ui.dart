@@ -1,19 +1,21 @@
-import 'dart:io';
+import 'package:bps_tracking/ui/home_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 SharedPreferences preferences;
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+class PresensiPage extends StatefulWidget {
+  const PresensiPage({Key key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    return _HomeState();
+    return _PresensiState();
   }
 }
 
-class _HomeState extends State<HomePage> {
+class _PresensiState extends State<PresensiPage> {
   var _current = 0;
   String nama;
   //ApiService apiService;
@@ -22,153 +24,146 @@ class _HomeState extends State<HomePage> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     TextStyle fontJudul = TextStyle(
-      // fontFamily: 'Lato',
-      fontSize: 28,
-      fontWeight: FontWeight.bold
+      fontFamily: 'Asap',
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.italic,
+      color: Colors.black,
     );
     TextStyle fontIsi = TextStyle(
-      // fontFamily: 'Lato',
+      fontFamily: 'Asap',
       fontSize: 20,
     );
     TextStyle textButton = TextStyle(
       color: Colors.white
     );
-    
+    TextStyle boldText = TextStyle(
+      fontWeight: FontWeight.bold
+    );
+    TextStyle clockText = TextStyle(
+      fontSize: 28,
+      letterSpacing: 2,
+      fontWeight: FontWeight.bold,
+      color: Colors.red[300]
+    );
+    var normalText = TextStyle(
+      fontFamily: 'Asap',
+      color: Colors.black,
+      fontSize: 20,
+    ); 
+    DateTime now = DateTime.now();
+    // String formattedDate = DateFormat('kk:mm:ss \n EEE d MMM').format(now);
+    String formattedDate = DateFormat('hh:mm').format(now);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detail Presensi'),
+        title: Text('Detail Presensi', style: fontJudul,),
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-          // padding: EdgeInsets.only(bottom: 16.0),
-          children: <Widget>[
-          Container(
-            color: Colors.amber,
-            // height: 300,
-            width: mediaQuery.size.width,
-            child: Padding(
-              padding: EdgeInsets.all(30),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Image.asset('resources/BPS.png', width: 30,),
-                      IconButton(
-                        icon: Icon(Icons.exit_to_app),
-                        tooltip: 'Logout',
-                        onPressed: () {
-                          setState(() {
-                            // _volume += 10;
-                          });
-                        },
+          padding: EdgeInsets.all(16),
+          child: Container(
+            // height: mediaQuery.size.height - 32,
+            // height: screenHeightExcludingToolbar(context),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Center(
+                  heightFactor: 4,
+                  child: Text(formattedDate, style: clockText,),
+                ),
+                Text('Lokasi Anda', style: boldText,),
+                Text('Jl. Granit Nila C-26, Driyorejo, Kabupaten Gresik, Jawa Timur'),
+                Text('Rencana Kegiatan', style: boldText,),
+                TextField(
+                  maxLines: 4,
+                  //decoration: InputDecoration.collapsed(hintText: "Enter your text here"),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      // contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      contentPadding: EdgeInsets.all(15.0),
+                      /* prefixIcon: Padding(
+                        padding: EdgeInsets.only(right: 30, left: 20),
+                        child: Icon(Icons.account_circle, color: Colors.grey),
+                      ), */
+                      hintText: "Enter your text here",
+                      //labelStyle: labelText,
+                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.red))
+                      //OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                  ),
+                ),
+                Text('Rencana Kegiatan', style: boldText,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Container(
+                      width: (mediaQuery.size.width/2),
+                      child: Text('Masukkan foto diri anda agar kami tahu anda telah siap kerja bersama kami',
+                    softWrap: true,maxLines: 4,)
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        color: Colors.red[300]
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text('Selamat Datang,', style: fontJudul,),
-                          Text('Rinaldy Siwy', style: fontIsi,),
-                          SizedBox(height: 10,),
-                          Material(
-                            elevation: 5.0,
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.red[400],
-                            child: MaterialButton(
-                              onPressed: (){
-                                Navigator.of(context).pushReplacementNamed('/location');
-                              },
-                              minWidth: 150,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Icon(Icons.fingerprint, color: Colors.white,),
-                                  SizedBox(width: 10,),
-                                  Text('ISI PRESENSI', style: textButton)
-                              ],)
-                            ),
-                            
-                          )
-                      ]),
-                      Image.asset('resources/siwy.png', width: 125,),
-                      SizedBox(width: 40,)
-                    ],
-                  ),
-                ]
-              )
+                      width: (mediaQuery.size.width/3),
+                      child: Center(child: Text('+ Tekan Di Sini Untuk Membuka Kamera',
+                      textAlign: TextAlign.center,)),
+                    )
+                  ],
+                ),
+                MaterialButton(
+                  onPressed: (){
+                    //
+                    SweetAlert.show(context,
+                      title: "Sukses",
+                      subtitle: "Data Terkirim",
+                      style: SweetAlertStyle.success,
+                      onPress: (bool isConfirm){
+                        Navigator.pop(context);
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                      });
+                  },
+                  minWidth: mediaQuery.size.width - 30,
+                  color: Colors.red[300],
+                  child: Text('KIRIM', style: textButton),
+                  elevation: 1,
+                ),
+                MaterialButton(
+                  onPressed: (){
+                    //
+                    Navigator.pop(context);
+                  },
+                  minWidth: mediaQuery.size.width - 30,
+                  child: Text('KEMBALI', style: TextStyle(color: Colors.red[300])),
+                  color: Colors.white,
+                  elevation: 1,
+                ),
+              ],
             ),
-          ),
-          Container(
-            width: mediaQuery.size.width,
-            color: Colors.red,
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text('Histori Kegiatan'),
-            )
-          ),
-          _buildListView(mediaQuery),
-          SizedBox(height: 60,)
-          /* Expanded(
-            child: _buildListView(mediaQuery)
-          ,) */
-        ]),
+          )
         )
       ),
-      floatingActionButton: Container(
-        width: mediaQuery.size.width - 50,
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            // Add your onPressed code here!
-          },
-          label: Text('LAPOR KEGIATAN'),
-          // icon: Icon(Icons.fingerprint),
-          backgroundColor: Colors.red[300],
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0)))
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      
     );
   }
 
-  Widget _buildListView(MediaQueryData mediaQuery) {
-    return Padding(
-      // padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
-      // color: Colors.blue,
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-        return Card(
-          child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('Kegiatan'+index.toString()),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text('Kegiatan'+index.toString()),
-                  Text('Kegiatan'+index.toString()),
-                  Text('Kegiatan'+index.toString()),
-              ],)
-            ],
-          ),
-          )
-        );
-      },
-      itemCount:12,
-      ),
-    );
-  }
+  Size screenSize(BuildContext context) {
+  return MediaQuery.of(context).size;
+}
+double screenHeight(BuildContext context,
+    {double dividedBy = 1, double reducedBy = 0.0}) {
+  return (screenSize(context).height - reducedBy) / dividedBy;
+}
+double screenWidth(BuildContext context,
+    {double dividedBy = 1, double reducedBy = 0.0}) {
+  return (screenSize(context).width - reducedBy) / dividedBy;
+}
+double screenHeightExcludingToolbar(BuildContext context,
+    {double dividedBy = 1}) {
+  return screenHeight(context, dividedBy: dividedBy, reducedBy: kToolbarHeight);
+}
 
 }
 

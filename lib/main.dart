@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'ui/login_ui.dart';
 import 'ui/home_ui.dart';
 import 'ui/maps_ui.dart';
-import 'dart:async';
-import 'dart:io';
 
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -22,13 +22,15 @@ class _HomeState extends State<HomePage> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     TextStyle fontJudul = TextStyle(
-      // fontFamily: 'Lato',
+      fontFamily: 'Asap',
       fontSize: 28,
-      fontWeight: FontWeight.bold
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.italic
     );
     TextStyle fontIsi = TextStyle(
-      // fontFamily: 'Lato',
+      fontFamily: 'Asap',
       fontSize: 20,
+      fontStyle: FontStyle.italic
     );
     TextStyle textButton = TextStyle(
       color: Colors.white
@@ -76,15 +78,13 @@ class _HomeState extends State<HomePage> {
                           Text('Selamat Datang,', style: fontJudul,),
                           Text('Rinaldy Siwy', style: fontIsi,),
                           SizedBox(height: 10,),
-                          Material(
-                            elevation: 5.0,
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.red[400],
-                            child: MaterialButton(
+                          MaterialButton(
                               onPressed: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapsPage()));
                               },
+                              color: Colors.red[300],
                               minWidth: 150,
+                              elevation: 1,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
@@ -93,8 +93,6 @@ class _HomeState extends State<HomePage> {
                                   Text('ISI PRESENSI', style: textButton)
                               ],)
                             ),
-                            
-                          )
                       ]),
                       Image.asset('resources/siwy.png', width: 125,),
                       SizedBox(width: 40,)
@@ -105,7 +103,7 @@ class _HomeState extends State<HomePage> {
             ),
           ),
           Padding(
-              padding: EdgeInsets.only(left:20, top:10),
+              padding: EdgeInsets.only(left:10, top:10),
               child: Text('Histori Kegiatan', style: boldText,),
           ),
           _buildListView(mediaQuery),
@@ -120,7 +118,7 @@ class _HomeState extends State<HomePage> {
         width: mediaQuery.size.width - 50,
         child: FloatingActionButton.extended(
           onPressed: () {
-            // Add your onPressed code here!
+            Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapsPage()));
           },
           label: Text('LAPOR KEGIATAN'),
           // icon: Icon(Icons.fingerprint),
