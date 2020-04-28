@@ -1,8 +1,8 @@
 import 'package:bps_tracking/ui/detail_laporan_ui.dart';
 import 'package:bps_tracking/ui/detail_presensi_ui.dart';
-import 'package:bps_tracking/ui/home_owner_ui.dart';
 import 'package:bps_tracking/ui/laporan_user_ui.dart';
 import 'package:bps_tracking/ui/maps_laporan_ui.dart';
+import 'package:bps_tracking/ui/report_home_ui.dart';
 import 'package:bps_tracking/ui/presensi_user_ui.dart';
 import 'package:flutter/material.dart';
 import 'ui/login_ui.dart';
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/presensi': (BuildContext context) => PresensiPage(),
         '/presensi_user': (BuildContext context) => PresensiUserPage(),
         '/lapor': (BuildContext context) => LaporKegiatanPage(),
+        '/ownerhome': (BuildContext context) => OwnerHomePage(),
         '/laporan_user': (BuildContext context) => LaporanUserPage(),
       },
     );

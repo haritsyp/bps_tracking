@@ -147,7 +147,14 @@ class _LoginState extends State<LoginPage> {
               //User mhs = User(nim: username, pin: password);
               pr.style(message: 'Login');
               pr.show();
-              Navigator.of(context).pushReplacementNamed('/home');
+
+              if(username == 'owner'){
+                Navigator.of(context).pushReplacementNamed('/ownerhome');
+              }else{
+                Navigator.of(context).pushReplacementNamed('/home');
+              }
+
+              //Navigator.of(context).pushReplacementNamed('/home');
               /* apiService.loginUser(mhs).then((isSuccess) {
                 if (isSuccess == "success") {
                   pr.hide();
